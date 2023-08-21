@@ -1,0 +1,40 @@
+<div class="topContainer" *ngIf="!isFeedbackAvailable">
+  <div class="main">
+<form #feedbackForm="ngForm" >
+  <label for="chk" aria-hidden="true">Feedback form</label>
+  <span for="chk" aria-hidden="true" style="color: white;">Ratting Value</span>
+  <input type="number" name="rating_value" placeholder="rating_value" [(ngModel)]="feedBackObj.rating_value" required>
+  <span for="chk" aria-hidden="true" style="color: white;">Comment</span>
+  <input type="text" name="comment" placeholder="comment" [(ngModel)]="feedBackObj.comment" required>
+  <button [disabled]="!feedbackForm.valid" (click)="onSubmitFeedBack(feedbackForm)">Submit</button>
+  <button type="button" class="btn btn-success logOut" (click)="logoutUser()" style="margin-top: 20px;">Logout</button>
+</form>
+</div>
+</div>
+<table class="table" *ngIf="isFeedbackAvailable">
+  <thead>
+    <tr>
+      <th scope="col">Rating Value</th>
+      <th scope="col">Comment</th>
+      <th scope="col">userId</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of allFeedBack">
+      <td>{{data.rating_value}}</td>
+      <td>{{data.comment}}</td>
+      <td>{{data.userid}}</td>
+      <td>{{data.date}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4" class="text-center">
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-success btn-sm" (click)="logoutUser()" style="margin-top: 25px;">Logout</button>
+        </div>
+      </td>
+    </tr>
+  </tfoot>
+</table>
